@@ -1,2 +1,2 @@
-// Example JavaScript
-console.log("Website Loaded Successfully!");
+// Optional JS
+console.log("TechStore Loaded");

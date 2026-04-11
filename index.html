@@ -2,28 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Result Calculator</title>
+    <title>DOM Experiment</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <h2>Student Result Calculator</h2>
+    <h1 id="heading">Welcome to My Page</h1>
 
-    <label>Enter Number of Subjects:</label>
-    <input type="number" id="subjects">
+    <p id="para">This is a sample paragraph. You can change me!</p>
 
-    <button onclick="getMarks()">Enter Marks</button>
+    <input type="text" id="inputText" placeholder="Enter new heading text">
 
-    <div id="marksInput"></div>
+    <br><br>
 
-    <button onclick="calculateResult()">Calculate Result</button>
+    <button id="btnText">Change Heading</button>
+    <button id="btnColor">Change Background</button>
+    <button id="btnSize">Increase Font Size</button>
+    <button id="btnToggle">Show/Hide Paragraph</button>
 
-    <div id="result"></div>
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>

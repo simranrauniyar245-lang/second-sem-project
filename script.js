@@ -1,55 +1,66 @@
-function getMarks() {
-    let n = document.getElementById("subjects").value;
-    let marksDiv = document.getElementById("marksInput");
-    marksDiv.innerHTML = "";
-
-    for (let i = 1; i <= n; i++) {
-        marksDiv.innerHTML += `
-            <input type="number" id="mark${i}" placeholder="Enter marks for subject ${i}">
-        `;
-    }
+let employees = [];
+function addEmployee() {
+let name = document.getElementById("name").value;
+let empId = document.getElementById("empId").value;
+let salary = parseFloat(document.getElementById("salary").value);
+let dept = document.getElementById("dept").value;
+if (name === "" || empId === "" || isNaN(salary) || dept === "") {
+alert("Please fill all fields properly");
+return;
 }
-
-function calculateResult() {
-    let n = document.getElementById("subjects").value;
-    let total = 0;
-
-    for (let i = 1; i <= n; i++) {
-        let mark = parseFloat(document.getElementById("mark" + i).value);
-
-        if (isNaN(mark)) {
-            alert("Please enter all marks!");
-            return;
-        }
-
-        total += mark;
-    }
-
-    let average = total / n;
-    let grade, result;
-
-    // Grade using if-else
-    if (average >= 75) {
-        grade = "A";
-    } else if (average >= 60) {
-        grade = "B";
-    } else if (average >= 50) {
-        grade = "C";
-    } else {
-        grade = "Fail";
-    }
-
-    // Pass/Fail
-    if (average >= 50) {
-        result = "Pass";
-    } else {
-        result = "Fail";
-    }
-
-    document.getElementById("result").innerHTML = `
-        <h3>Total Marks: ${total}</h3>
-        <h3>Average: ${average.toFixed(2)}</h3>
-        <h3>Grade: ${grade}</h3>
-        <h3>Result: ${result}</h3>
-    `;
+let employee = {
+name: name,
+id: empId,
+salary: salary,
+department: dept
+};
+employees.push(employee);
+alert("Employee Added Successfully!");
+document.getElementById("name").value = "";
+document.getElementById("empId").value = "";
+document.getElementById("salary").value = "";
+document.getElementById("dept").value = "";
+}
+function displayEmployees() {
+let output = "<h3>All Employees</h3>";
+employees.forEach(emp => {
+output += `
+Name: ${emp.name} |
+ID: ${emp.id} |
+Salary: ₹${emp.salary} |
+Dept: ${emp.department} <br>`;
+});
+document.getElementById("output").innerHTML = output;
+}
+function filterSalary() {
+let filtered = employees.filter(emp => emp.salary > 50000);
+let output = "<h3>Employees with Salary > ₹50,000</h3>";
+filtered.forEach(emp => {
+output += `
+Name: ${emp.name} |
+Salary: ₹${emp.salary} <br>`;
+});
+document.getElementById("output").innerHTML = output;
+}
+function totalSalary() {
+let total = employees.reduce((sum, emp) => sum + emp.salary, 0);
+document.getElementById("output").innerHTML =
+"<h3>Total Salary Payout: ₹" + total + "</h3>";
+}
+function averageSalary() {
+if (employees.length === 0) {
+document.getElementById("output").innerHTML =
+"<h3>No employee records available</h3>";
+return;
+}
+let total = employees.reduce((sum, emp) => sum + emp.salary, 0);
+let avg = total / employees.length;
+document.getElementById("output").innerHTML =
+"<h3>Average Salary: ₹" + avg.toFixed(2) + "</h3>";
+}
+function countDepartment() {
+let deptName = prompt("Enter Department Name:");
+let count = employees.filter(emp => emp.department === deptName).length;
+document.getElementById("output").innerHTML =
+"<h3>Employees in " + deptName + ": " + count + "</h3>";
 }

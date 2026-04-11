@@ -1,11 +1,11 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial;
 }
 
-.box {
-    background-color: #f8f9fa;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    text-align: center;
+.card {
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }

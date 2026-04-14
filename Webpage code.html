@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even Odd Checker</title>
+</head>
+<body>
+
+    <h2>Enter a Number</h2>
+    
+    <input type="number" id="num" placeholder="Enter number">
+    <button onclick="checkNumber()">Check</button>
+
+    <h3 id="result"></h3>
+    <h3>Numbers:</h3>
+    <p id="numbers"></p>
+
+    <script>
+        function checkNumber() {
+            let n = document.getElementById("num").value;
+
+            // Convert string to number
+            n = Number(n);
+
+            let result = document.getElementById("result");
+            let numbers = document.getElementById("numbers");
+
+            // Check if input is empty
+            if (isNaN(n) || n <= 0) {
+                result.innerHTML = "Please enter a valid positive number";
+                numbers.innerHTML = "";
+                return;
+            }
+
+            // Even or Odd
+            if (n % 2 === 0) {
+                result.innerHTML = n + " is Even";
+            } else {
+                result.innerHTML = n + " is Odd";
+            }
+
+            // Print numbers from 1 to n
+            let output = "";
+            for (let i = 1; i <= n; i++) {
+                output += i + " ";
+            }
+
+            numbers.innerHTML = output;
+        }
+    </script>
+
+</body>
+</html>

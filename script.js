@@ -1,36 +1,40 @@
-let heading = document.getElementById("heading");
-let para = document.getElementById("para");
-let input = document.getElementById("inputText");
+const input = document.getElementById("taskInput");
+const addBtn = document.getElementById("addBtn");
+const list = document.getElementById("taskList");
+const count = document.getElementById("count");
 
-let btnText = document.getElementById("btnText");
-let btnColor = document.getElementById("btnColor");
-let btnSize = document.getElementById("btnSize");
-let btnToggle = document.getElementById("btnToggle");
+function updateCount() {
+    count.innerText = list.children.length;
+}
 
-// Change heading text
-btnText.addEventListener("click", function () {
-    heading.innerText = input.value || "No text entered!";
-});
+function addTask() {
+    let taskText = input.value.trim();
+    if (taskText === "") return;
 
-// Change background color randomly
-btnColor.addEventListener("click", function () {
-    let colors = ["lightblue", "lightgreen", "lightpink", "lightyellow"];
-    let randomColor = colors[Math.floor(Math.random() * colors.length)];
-    document.body.style.backgroundColor = randomColor;
-});
+    let li = document.createElement("li");
 
-// Increase font size
-btnSize.addEventListener("click", function () {
-    let currentSize = window.getComputedStyle(para).fontSize;
-    let newSize = parseInt(currentSize) + 2;
-    para.style.fontSize = newSize + "px";
-});
+    let span = document.createElement("span");
+    span.textContent = taskText;
 
-// Show/Hide paragraph
-btnToggle.addEventListener("click", function () {
-    if (para.style.display === "none") {
-        para.style.display = "block";
-    } else {
-        para.style.display = "none";
-    }
+    let delBtn = document.createElement("button");
+    delBtn.textContent = "X";
+    delBtn.classList.add("delete");
+
+    li.appendChild(span);
+    li.appendChild(delBtn);
+    list.appendChild(li);
+
+    input.value = "";
+    updateCount();
+
+    delBtn.addEventListener("click", function () {
+        li.remove();
+        updateCount();
+    });
+}
+
+addBtn.addEventListener("click", addTask);
+
+input.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") addTask();
 });

@@ -1,40 +1,23 @@
-const input = document.getElementById("taskInput");
-const addBtn = document.getElementById("addBtn");
-const list = document.getElementById("taskList");
-const count = document.getElementById("count");
+function addPatient() {
 
-function updateCount() {
-    count.innerText = list.children.length;
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+
+    if(name === "" || age === ""){
+        alert("Please fill all fields");
+        return;
+    }
+
+    let table = document.getElementById("patientList");
+
+    let row = table.insertRow();
+
+    let cell1 = row.insertCell(0);
+    let cell2 = row.insertCell(1);
+
+    cell1.innerHTML = name;
+    cell2.innerHTML = age;
+
+    document.getElementById("name").value = "";
+    document.getElementById("age").value = "";
 }
-
-function addTask() {
-    let taskText = input.value.trim();
-    if (taskText === "") return;
-
-    let li = document.createElement("li");
-
-    let span = document.createElement("span");
-    span.textContent = taskText;
-
-    let delBtn = document.createElement("button");
-    delBtn.textContent = "X";
-    delBtn.classList.add("delete");
-
-    li.appendChild(span);
-    li.appendChild(delBtn);
-    list.appendChild(li);
-
-    input.value = "";
-    updateCount();
-
-    delBtn.addEventListener("click", function () {
-        li.remove();
-        updateCount();
-    });
-}
-
-addBtn.addEventListener("click", addTask);
-
-input.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") addTask();
-});
